@@ -21,6 +21,19 @@ bool Config::setMac(const String mac) {
     return true;
 }
 
+bool Config::getLedEnable() {
+    prefs.begin(config, true);
+    bool enable = prefs.getBool("led_enable", true);
+    prefs.end();
+    return enable;
+}
+
+void Config::setLedEnable(const bool enable) {
+    prefs.begin(config, false);
+    prefs.putBool("led_enable", enable);
+    prefs.end();
+}
+
 bool isVaildMac(const String mac) {
     String p = "nn:nn:nn:nn:nn:nn";
     if (mac.length() != p.length()) {
